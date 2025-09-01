@@ -10,6 +10,15 @@ This project provides tools and scripts for controlling and automating gameplay 
 
 More details to be added as the project develops.
 
+## Development
+
+```bash
+make up
+```
+
+Open browser to http://localhost:21025/
+
+
 ## License
 
 MIT
