@@ -1,4 +1,4 @@
-.PHONY: up down build build-dev deploy deploy-dev deploy-local deploy-local-dev install clean setup watch logs restart
+.PHONY: up down build build-dev deploy deploy-dev deploy-local deploy-local-dev install clean setup watch logs restart type-check type-check-watch
 
 # Server management
 up:
@@ -25,6 +25,12 @@ build-dev:
 
 watch:
 	npm run watch
+
+type-check:
+	npm run type-check
+
+type-check-watch:
+	npm run type-check:watch
 
 deploy:
 	npm run deploy

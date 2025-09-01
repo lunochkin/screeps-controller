@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = (env, argv) => {
   const config = {
-    entry: './src/engine/main.js',
+    entry: './src/engine/main.ts',
     target: 'node',
     mode: argv.mode || 'development',
     devtool: argv.mode === 'development' ? 'source-map' : false,
@@ -17,6 +17,11 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
+          test: /\.ts$/,
+          exclude: /node_modules/,
+          use: 'ts-loader'
+        },
+        {
           test: /\.js$/,
           exclude: /node_modules/,
           use: {
@@ -30,7 +35,7 @@ module.exports = (env, argv) => {
     },
 
     resolve: {
-      extensions: ['.js', '.json']
+      extensions: ['.ts', '.js', '.json']
     },
 
     optimization: {
