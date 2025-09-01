@@ -68,11 +68,18 @@ declare global {
     storage?: StructureStorage;
     terminal?: StructureTerminal;
     visual: RoomVisual;
-    find: (type: FindConstant) => RoomObject[];
+    find: (type: FindConstant, opts?: FindOptions) => RoomObject[];
     lookAt: (x: number, y: number) => LookAtResult[];
     lookAtArea: (top: number, left: number, bottom: number, right: number, asArray?: boolean) => LookAtResultMatrix | LookAtResultWithPos[];
     lookForAt: (type: string, x: number, y: number) => any;
     lookForAtArea: (type: string, top: number, left: number, bottom: number, right: number, asArray?: boolean) => any;
+  }
+
+  // RoomObject interface (base for all objects in rooms)
+  interface RoomObject {
+    id: string;
+    pos: RoomPosition;
+    room: Room;
   }
 
   // RoomPosition interface
@@ -83,8 +90,8 @@ declare global {
     getRangeTo: (target: RoomPosition | { pos: RoomPosition }) => number;
     isNearTo: (target: RoomPosition | { pos: RoomPosition }) => boolean;
     getDirectionTo: (target: RoomPosition | { pos: RoomPosition }) => DirectionConstant;
-    findClosestByRange: <T extends RoomObject>(objects: T[]) => T | null;
-    findClosestByPath: <T extends RoomObject>(objects: T[]) => T | null;
+    findClosestByRange: (type: FindConstant, opts?: FindOptions) => RoomObject | null;
+    findClosestByPath: (type: FindConstant, opts?: FindOptions) => RoomObject | null;
     look: () => LookAtResult[];
     lookFor: (type: string) => any[];
   }
@@ -174,6 +181,9 @@ declare global {
   // Store interface
   interface StoreDefinition {
     [resourceType: string]: number;
+    getFreeCapacity: (resourceType?: ResourceConstant) => number;
+    getCapacity: (resourceType?: ResourceConstant) => number;
+    getUsedCapacity: (resourceType?: ResourceConstant) => number;
   }
 
   // Body part interface
@@ -220,6 +230,28 @@ declare global {
   const ERR_NOT_ENOUGH_EXTENSIONS = -14;
   const ERR_RCL_NOT_ENOUGH = -15;
   const ERR_GCL_NOT_ENOUGH = -16;
+
+  // Body part constants
+  const MOVE = 'move';
+  const WORK = 'work';
+  const CARRY = 'carry';
+  const ATTACK = 'attack';
+  const RANGED_ATTACK = 'ranged_attack';
+  const TOUGH = 'tough';
+  const HEAL = 'heal';
+  const CLAIM = 'claim';
+
+  // Resource constants
+  const RESOURCE_ENERGY = 'energy';
+  const RESOURCE_POWER = 'power';
+  const RESOURCE_H = 'H';
+  const RESOURCE_O = 'O';
+  const RESOURCE_U = 'U';
+  const RESOURCE_L = 'L';
+  const RESOURCE_K = 'K';
+  const RESOURCE_Z = 'Z';
+  const RESOURCE_X = 'X';
+  const RESOURCE_G = 'G';
 
   // Find constants
   const FIND_CREEPS = 101;
