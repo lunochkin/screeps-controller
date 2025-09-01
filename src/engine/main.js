@@ -1,5 +1,5 @@
 const loop = () => {
-  console.log("loop", Game.time);
+  console.log("Screeps Controller running at tick:", Game.time);
 };
 
 module.exports = {

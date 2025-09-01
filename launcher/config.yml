@@ -1,4 +1,4 @@
-steamKey:
+steamKey: 4CEEB860C34649288FF44A45B0BC6607
 # Sometimes dependencies change in ways that break screeps-launcher or the builds it does.  To work around those issues, some package versions need to be pinned.  See the current list in the README at https://github.com/screepers/screeps-launcher/ or the specific issue tracking pinned packages: https://github.com/screepers/screeps-launcher/issues/34
 pinnedPackages:
   ssri: 8.0.1
@@ -9,7 +9,7 @@ pinnedPackages:
 mods: # Recommended mods
 - screepsmod-auth
 - screepsmod-admin-utils
-- screepsmod-mongo  # You must install and start `mongodb` and `redis` before this mod will work
+- screepsmod-mongo  # You must   install and start `mongodb` and `redis` before this mod will work
 bots:
   simplebot: screepsbot-zeswarm
 serverConfig: # This section requires screepsmod-admin-utils to work
