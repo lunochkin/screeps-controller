@@ -22,6 +22,8 @@ declare global {
       type: string;
     };
     getObjectById: <T extends RoomObject>(id: string) => T | null;
+
+    enableLog?: boolean;
   };
 
   var Memory: {

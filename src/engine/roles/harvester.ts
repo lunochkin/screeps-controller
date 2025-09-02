@@ -1,4 +1,5 @@
-import { spawnCreep, getCreepsByRole } from './helpers'
+import { spawnCreep, getCreepsByRole } from '../helpers'
+import { log } from '../log'
 
 export const ROLE_HARVESTER = 'harvester'
 
@@ -12,7 +13,7 @@ export const harversterRole = {
     }
 
     if (spawnCreep(spawn, ROLE_HARVESTER, [WORK, CARRY, MOVE])) {
-      console.log(`Spawned harvester: ${spawn.name}`)
+      log(`Spawned harvester: ${spawn.name}`)
     }
   },
   run: (spawn: StructureSpawn, creep: Creep): void => {

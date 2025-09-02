@@ -1,5 +1,5 @@
 
-export const getStructureByType = (type: StructureConstant): Structure[] => {
+export const getStructuresByType = (type: StructureConstant): Structure[] => {
   return Object.values(Game.structures).filter(structure => structure.structureType === type)
 }
 

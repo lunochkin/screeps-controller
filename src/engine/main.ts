@@ -1,6 +1,10 @@
-import { harversterRole, ROLE_HARVESTER } from './harvester'
-import { rcUpgraderRole, ROLE_RC_UPGRADER } from './rcUpgrader'
-import { builderRole, ROLE_BUILDER } from './builder'
+import { harversterRole, ROLE_HARVESTER } from './roles/harvester'
+import { rcUpgraderRole, ROLE_RC_UPGRADER } from './roles/rcUpgrader'
+import { builderRole, ROLE_BUILDER } from './roles/builder'
+import { log, enableLog, disableLog } from './log'
+
+;(global as any).enableLog = enableLog
+;(global as any).disableLog = disableLog
 
 // Main game loop for Screeps Controller
 const loop = (): void => {
@@ -33,7 +37,7 @@ const loop = (): void => {
   }
 
   const endUsage = Game.cpu.getUsed()
-  console.log("Screeps Controller finished at tick:", Game.time, ' with usage:', endUsage - startUsage)
+  log('Usage:', endUsage - startUsage)
 }
 
 module.exports = {

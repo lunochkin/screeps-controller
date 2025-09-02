@@ -1,4 +1,5 @@
-import { spawnCreep, getCreepsByRole } from './helpers'
+import { spawnCreep, getCreepsByRole } from '../helpers'
+import { log } from '../log'
 
 export const ROLE_BUILDER = 'builder'
 
@@ -12,7 +13,7 @@ export const builderRole = {
     }
 
     if (spawnCreep(spawn, ROLE_BUILDER, [WORK, CARRY, MOVE])) {
-      console.log(`Spawned builder: ${spawn.name}`)
+      log(`Spawned builder: ${spawn.name}`)
     }
   },
   run: (creep: Creep): void => {

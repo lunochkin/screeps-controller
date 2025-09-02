@@ -1,4 +1,5 @@
-import { getCreepsByRole, spawnCreep } from './helpers'
+import { getCreepsByRole, spawnCreep } from '../helpers'
+import { log } from '../log'
 
 export const ROLE_RC_UPGRADER = 'rcUpgrader'
 
@@ -12,7 +13,7 @@ export const rcUpgraderRole = {
     }
 
     if (spawnCreep(spawn, ROLE_RC_UPGRADER, [WORK, CARRY, MOVE])) {
-      console.log(`Spawned rcUpgrader: ${spawn.name}`)
+      log(`Spawned rcUpgrader: ${spawn.name}`)
     }
   },
   run: (creep: Creep): void => {
