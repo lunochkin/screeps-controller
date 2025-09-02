@@ -2,7 +2,7 @@ import { getCreepsByRole, spawnCreep } from './helpers'
 
 export const ROLE_RC_UPGRADER = 'rcUpgrader'
 
-const MAX_RC_UPGRADERS = 4
+const MAX_RC_UPGRADERS = 5
 
 export const rcUpgraderRole = {
   spawn: (spawn: StructureSpawn): void => {

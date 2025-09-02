@@ -36,7 +36,7 @@ export const spawnCreep = (spawn: StructureSpawn, role: string, bodyParts: BodyP
 
   const result = spawn.spawnCreep(bodyParts, name, {
     memory: {
-      role: role
+      role,
     }
   })
   if (result !== OK) {

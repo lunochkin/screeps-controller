@@ -15,17 +15,21 @@ export const harversterRole = {
       console.log(`Spawned harvester: ${spawn.name}`)
     }
   },
-  run: (creep: Creep): void => {
+  run: (spawn: StructureSpawn, creep: Creep): void => {
     if (creep.store.getFreeCapacity(RESOURCE_ENERGY) === 0) {
-      const spawn = creep.room.find(FIND_MY_STRUCTURES, {
-        filter: (structure: Structure) => structure.structureType === 'spawn'
-      })[0] as StructureSpawn
-
       if (spawn && creep.transfer(spawn, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
         creep.moveTo(spawn)
       }
     } else {
-      const source = creep.pos.findClosestByRange(FIND_SOURCES)
+      let sourceId = creep.memory['sourceId']
+      let source: Source | null = null
+      if (!sourceId) {
+        source = creep.pos.findClosestByRange(FIND_SOURCES) as Source
+        creep.memory['sourceId'] = source.id
+      } else {
+        source = Game.getObjectById<Source>(sourceId)
+      }
+
       if (source && creep.harvest(source) === ERR_NOT_IN_RANGE) {
         creep.moveTo(source)
       }
