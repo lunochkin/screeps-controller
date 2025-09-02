@@ -75,6 +75,7 @@ declare global {
     lookAtArea: (top: number, left: number, bottom: number, right: number, asArray?: boolean) => LookAtResultMatrix | LookAtResultWithPos[];
     lookForAt: (type: string, x: number, y: number) => any;
     lookForAtArea: (type: string, top: number, left: number, bottom: number, right: number, asArray?: boolean) => any;
+    createConstructionSite: (x: number, y: number, structureType: StructureConstant, name?: string) => ConstructionSite;
   }
 
   // RoomObject interface (base for all objects in rooms)
