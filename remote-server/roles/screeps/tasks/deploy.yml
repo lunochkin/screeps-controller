@@ -1,0 +1,42 @@
+---
+- name: Copy Docker Compose files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ screeps_data_dir }}/"
+    owner: screeps
+    group: screeps
+    mode: '0644'
+  with_items:
+    - "../launcher/docker-compose.yaml"
+    - "../launcher/config.yml"
+
+- name: Check if .env file exists
+  stat:
+    path: .env
+  register: env_file_exists
+
+- name: Copy environment file
+  copy:
+    src: .env
+    dest: "{{ screeps_data_dir }}/"
+    owner: screeps
+    group: screeps
+    mode: '0600'
+  when: env_file_exists.stat.exists
+
+- name: Start Screeps services
+  command: docker compose up -d
+  args:
+    chdir: "{{ screeps_data_dir }}"
+  become_user: screeps
+
+- name: Wait for services to be ready
+  wait_for:
+    port: "{{ screeps_port }}"
+    host: "{{ ansible_default_ipv4.address }}"
+    delay: 10
+    timeout: 300
+
+- name: Show server status
+  debug:
+    msg: "Screeps server is running on http://{{ ansible_default_ipv4.address }}:{{ screeps_port }}"

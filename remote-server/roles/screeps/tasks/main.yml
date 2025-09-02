@@ -1,0 +1,24 @@
+---
+- name: Install system dependencies
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+      - software-properties-common
+      - python3-pip
+    state: present
+    update_cache: yes
+
+
+
+- name: Install Docker
+  include_tasks: docker.yml
+
+- name: Setup Screeps environment
+  include_tasks: setup.yml
+
+- name: Deploy Screeps application
+  include_tasks: deploy.yml

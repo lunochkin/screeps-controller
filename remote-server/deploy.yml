@@ -1,0 +1,6 @@
+---
+- name: Deploy Screeps Server
+  hosts: screeps_servers
+  become: yes
+  roles:
+    - screeps

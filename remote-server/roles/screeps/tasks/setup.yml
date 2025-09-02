@@ -1,0 +1,37 @@
+---
+- name: Create screeps user
+  user:
+    name: screeps
+    system: yes
+    shell: /bin/bash
+    home: "{{ screeps_data_dir }}"
+
+- name: Create screeps directory
+  file:
+    path: "{{ screeps_data_dir }}"
+    state: directory
+    owner: screeps
+    group: screeps
+    mode: '0755'
+
+- name: Add screeps user to docker group
+  user:
+    name: screeps
+    groups: docker
+    append: yes
+
+- name: Enable UFW firewall
+  ufw:
+    state: enabled
+
+- name: Allow SSH
+  ufw:
+    rule: allow
+    port: "22"
+    proto: tcp
+
+- name: Allow Screeps port
+  ufw:
+    rule: allow
+    port: "{{ screeps_port }}"
+    proto: tcp

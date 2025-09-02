@@ -4,7 +4,7 @@ import { builderRole, ROLE_BUILDER } from './builder'
 
 // Main game loop for Screeps Controller
 const loop = (): void => {
-  const startUsage = Game.cpu.getUsed()
+  // const startUsage = Game.cpu.getUsed()
   
   const spawn = Game.spawns['Spawn1']
   if (!spawn) {
@@ -32,8 +32,8 @@ const loop = (): void => {
     }
   }
 
-  const endUsage = Game.cpu.getUsed()
-  console.log("Screeps Controller finished at tick:", Game.time, ' with usage:', endUsage - startUsage)
+  // const endUsage = Game.cpu.getUsed()
+  // console.log("Screeps Controller finished at tick:", Game.time, ' with usage:', endUsage - startUsage)
 }
 
 module.exports = {

@@ -295,6 +295,9 @@ declare global {
     [key: string]: any;
   }
 
+  // Look constants
+  const LOOK_EXITS = 'exit';
+
   interface LookAtResultMatrix {
     [y: number]: { [x: number]: LookAtResult[] };
   }

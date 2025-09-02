@@ -1,0 +1,15 @@
+---
+# Screeps server configuration
+screeps_port: 21025
+screeps_data_dir: /opt/screeps
+screeps_domain: ""
+
+# Docker configuration
+docker_compose_version: "3.8"
+
+# Server configuration
+server_tick_rate: 1000
+server_password: ""
+
+# Steam configuration
+steam_key: ""
