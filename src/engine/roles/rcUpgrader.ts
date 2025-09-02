@@ -5,6 +5,17 @@ export const ROLE_RC_UPGRADER = 'rcUpgrader'
 
 const MAX_RC_UPGRADERS = 5
 
+const getSource = (creep: Creep): Source | null => {
+  const sourceId = creep.memory['rcControllerSourceId'] || creep.memory['sourceId']
+  if (!sourceId) {
+    const source = creep.pos.findClosestByPath(FIND_SOURCES) as Source
+    creep.memory['sourceId'] = source.id
+    return source
+  }
+
+  return Game.getObjectById<Source>(sourceId)
+}
+
 export const rcUpgraderRole = {
   spawn: (spawn: StructureSpawn): void => {
     const rcUpgraders = getCreepsByRole(ROLE_RC_UPGRADER)
@@ -17,7 +28,7 @@ export const rcUpgraderRole = {
     }
   },
   run: (creep: Creep): void => {
-    const source = creep.pos.findClosestByPath(FIND_SOURCES)
+    const source = getSource(creep)
     if (!source) {
       return
     }
@@ -35,6 +46,13 @@ export const rcUpgraderRole = {
         const rcController = creep.room.controller
         if (rcController) {
           creep.upgradeController(rcController)
+
+          if (!creep.memory['rcControllerSourceId']) {
+            const source = creep.pos.findClosestByPath(FIND_SOURCES) as Source
+            creep.memory['rcControllerSourceId'] = source.id
+
+            delete creep.memory['sourceId']
+          }
         }
       } else {
         const rcController = creep.room.controller

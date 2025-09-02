@@ -5,6 +5,17 @@ export const ROLE_HARVESTER = 'harvester'
 
 const MAX_HARVESTERS = 3
 
+const getSource = (creep: Creep): Source | null => {
+  const sourceId = creep.memory['sourceId']
+  if (!sourceId) {
+    const source = creep.pos.findClosestByRange(FIND_SOURCES) as Source
+    creep.memory['sourceId'] = source.id
+    return source
+  }
+
+  return Game.getObjectById<Source>(sourceId)
+}
+
 export const harversterRole = {
   spawn: (spawn: StructureSpawn): void => {
     const harvesters = getCreepsByRole(ROLE_HARVESTER)
@@ -18,20 +29,16 @@ export const harversterRole = {
   },
   run: (spawn: StructureSpawn, creep: Creep): void => {
     if (creep.store.getFreeCapacity(RESOURCE_ENERGY) === 0) {
-      if (spawn && creep.transfer(spawn, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+      if (creep.transfer(spawn, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
         creep.moveTo(spawn)
       }
     } else {
-      let sourceId = creep.memory['sourceId']
-      let source: Source | null = null
-      if (!sourceId) {
-        source = creep.pos.findClosestByRange(FIND_SOURCES) as Source
-        creep.memory['sourceId'] = source.id
-      } else {
-        source = Game.getObjectById<Source>(sourceId)
+      const source = getSource(creep)
+      if (!source) {
+        return
       }
 
-      if (source && creep.harvest(source) === ERR_NOT_IN_RANGE) {
+      if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
         creep.moveTo(source)
       }
     }
