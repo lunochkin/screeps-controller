@@ -51,6 +51,7 @@ declare global {
     attack: (target: Creep | Structure) => ScreepsReturnCode;
     heal: (target: Creep) => ScreepsReturnCode;
     transfer: (target: Creep | Structure, resourceType: ResourceConstant, amount?: number) => ScreepsReturnCode;
+    upgradeController: (target: StructureController) => ScreepsReturnCode;
     pickup: (target: Resource) => ScreepsReturnCode;
     drop: (resourceType: ResourceConstant, amount?: number) => ScreepsReturnCode;
     say: (message: string, public?: boolean) => ScreepsReturnCode;
@@ -199,7 +200,7 @@ declare global {
     | 'storage' | 'tower' | 'observer' | 'powerSpawn' | 'extractor' | 'lab' 
     | 'terminal' | 'container' | 'nuker' | 'factory';
   type BodyPartConstant = 
-    | 'move' | 'work' | 'carry' | 'attack' | 'ranged_attack' | 'tough' | 'heal' | 'claim' | 'ranged_attack';
+    | 'move' | 'work' | 'carry' | 'attack' | 'ranged_attack' | 'tough' | 'heal' | 'claim';
   type ResourceConstant = 
     | 'energy' | 'power' | 'H' | 'O' | 'U' | 'L' | 'K' | 'Z' | 'X' | 'G';
   type ColorConstant = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
@@ -232,14 +233,14 @@ declare global {
   const ERR_GCL_NOT_ENOUGH = -16;
 
   // Body part constants
-  const MOVE = 'move';
-  const WORK = 'work';
-  const CARRY = 'carry';
-  const ATTACK = 'attack';
-  const RANGED_ATTACK = 'ranged_attack';
-  const TOUGH = 'tough';
-  const HEAL = 'heal';
-  const CLAIM = 'claim';
+  const MOVE: 'move' = 'move';
+  const WORK: 'work' = 'work';
+  const CARRY: 'carry' = 'carry';
+  const ATTACK: 'attack' = 'attack';
+  const RANGED_ATTACK: 'ranged_attack' = 'ranged_attack';
+  const TOUGH: 'tough' = 'tough';
+  const HEAL: 'heal' = 'heal';
+  const CLAIM: 'claim' = 'claim';
 
   // Resource constants
   const RESOURCE_ENERGY = 'energy';
