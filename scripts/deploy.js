@@ -101,7 +101,17 @@ class ScreepsDeployer {
     this.logDeployment();
 
     // Choose HTTP or HTTPS based on deployment type
-    const requestModule = this.config.host === 'localhost' ? http : https;
+    // Use HTTP for localhost and explicit HTTP servers, HTTPS for explicit HTTPS servers
+    // Can be overridden with SCREEPS_PROTOCOL environment variable
+    let useHttps = this.config.host === 'localhost' ? false :
+                   (this.config.host.startsWith('https://') || this.config.port === 443);
+
+    // Override with explicit protocol setting
+    if (process.env.SCREEPS_PROTOCOL) {
+      useHttps = process.env.SCREEPS_PROTOCOL.toLowerCase() === 'https';
+    }
+
+    const requestModule = useHttps ? https : http;
     
     const req = requestModule.request(options, (res) => {
       let data = '';
