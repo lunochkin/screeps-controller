@@ -44,6 +44,16 @@ deploy-local:
 deploy-local-dev:
 	npm run deploy:local:dev
 
+# Remote server management
+deploy-remote:
+	cd remote-server && ansible-playbook deploy.yml
+
+update-remote:
+	cd remote-server && ansible-playbook update.yml
+
+restart-remote:
+	cd remote-server && ansible-playbook update.yml --tags "restart"
+
 clean:
 	rm -rf dist/
 	rm -rf node_modules/

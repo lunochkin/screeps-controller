@@ -9,6 +9,7 @@
   with_items:
     - "../launcher/docker-compose.yaml"
     - "../launcher/config.yml"
+    - "./.env"
 
 - name: Check if .env file exists
   stat:
