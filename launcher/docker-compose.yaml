@@ -11,7 +11,7 @@ services:
       MONGO_HOST: mongo
       REDIS_HOST: redis
       STEAM_KEY: ${STEAM_KEY}
-      SERVER_PASSWORD: Qwerty123
+      SERVER_PASSWORD: ${SERVER_PASSWORD}
     depends_on:
       mongo:
         condition: service_healthy
